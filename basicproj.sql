@@ -156,3 +156,17 @@ select Gender,Product_Category,count(distinct Transaction_ID) as Number_of_Trans
 from raw_data
 group by Gender,Product_Category
 order by Number_of_Transactions desc;
+
+-- Highest Spending Customers
+
+select Customer_ID from (select Customer_ID,sum(Total_Amount) as Total_Spend
+from raw_data
+group by Customer_ID
+order by Total_Spend desc) as count_revenue
+where Total_Spend = 2000.00;
+
+select distinct Customer_ID,Product_Category,sum(Total_Amount) as Total_Spend
+from raw_data
+group by Customer_ID,Product_Category
+order by Total_Spend desc;
+
